@@ -10,7 +10,7 @@ Designer Engineer:
 Ebio, Ann Clarise
 
 Date:
-Oct. 14, 2026
+Oct. 28, 2026
 ======================================================*/
 
 #include "decoder.h"
@@ -37,28 +37,29 @@ void setup() {
 }
 
 void loop() {
-RstIn = digitalRead(Rst);
-if (RstIn == HIGH){
+  RstIn = digitalRead(Rst);
 
-  inputAdd = digitalRead(IrAdd);
-  if (inputAdd == 0) {
-    if (counter < 99) {
-      counter++;
+  if (RstIn == LOW) {
+    counter = 9;
+  } else {
+    inputAdd = digitalRead(IrAdd);
+    if (inputAdd == 0) {
+      if (counter < 99) {
+        counter++;
+      }
+      delay(300);
     }
-    delay(300);
-  }
 
-  inputSub = digitalRead(IrSub);
-  if (inputSub == 0) {
-    if (counter > 0) {
-      counter--;
+    inputSub = digitalRead(IrSub);
+    if (inputSub == 0) {
+      if (counter > 0) {
+        counter--;
+      }
+      delay(300);
     }
-    delay(300);
   }
 
   displayCounter(counter);
-} else {
-  counter = 9;
-  }
+  
   delay(50);
 }
